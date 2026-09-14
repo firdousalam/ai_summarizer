@@ -271,3 +271,24 @@ When teaching MCP:
 - Highlight that MCP makes AI integration **future-proof**: if tomorrow you want to use a different model, you don’t need to rebuild the whole app.
 
 ---
+
+---
+
+## 🖼 MCP Architecture Diagram
+
+Below is a visual representation of how the summarizer project works with MCP:
+
+![MCP Architecture Diagram](https://copilot.microsoft.com/th/id/BCO.d2b4b888-bb40-4692-bfcf-6c5b98da0184.png)
+
+### Flow Explanation
+1. **User (Web UI)** → Enters article URL.
+2. **Flask App** → Fetches article text and sends it forward.
+3. **MCP (Model Context Protocol)** → Standardizes communication between the app and the model.
+4. **Ollama Model** → Processes the text and generates a summary.
+5. **MCP** → Returns the summary back in a consistent format.
+6. **User (Web UI)** → Views the summarized output.
+
+This diagram makes it clear that MCP is the **bridge** ensuring smooth communication between your app and Ollama.
+
+---
+
