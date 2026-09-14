@@ -173,3 +173,101 @@ Code
 This addition makes your README much more **developer-friendly** and prevents the exact issue you ran into (global vs venv mismatch).  
 
 Would you like me to also add a **[Project Structure diagram](ca://s?q=Add_project_structure_to_README)** section so new contributors can instantly see how `app.py`, `fetcher.py`, and `summarizer.py` fit together?
+
+
+
+
+---
+
+# 🧩 Understanding Model Context Protocol (MCP)
+
+This project demonstrates the **Model Context Protocol (MCP)** in action with **Ollama**.  
+MCP is a standard way to connect applications (like our Python/Flask app) with AI models, ensuring smooth communication and interoperability.
+
+---
+
+## 🔍 What is MCP?
+
+**Model Context Protocol (MCP)** is a protocol designed to:
+- Standardize how applications talk to AI models.
+- Provide a consistent interface for sending prompts and receiving responses.
+- Allow developers to swap models or backends without rewriting the entire app.
+
+Think of MCP as the "translator" between your app and the AI model.
+
+---
+
+## 🏗️ Architecture in This Project
+
+Here’s how MCP fits into our summarizer:
+
+1. **[Frontend (Flask UI)](ca://s?q=Enhance_Flask_UI_for_summarizer)**  
+   - User enters an article URL.  
+   - Flask sends the request to the backend.
+
+2. **[Fetcher](ca://s?q=Fetch_articles_with_Python)**  
+   - Scrapes the article text using `requests` + `BeautifulSoup`.
+
+3. **[Summarizer](ca://s?q=Summarize_text_with_Ollama)**  
+   - Sends the text to Ollama via MCP.  
+   - MCP ensures the request is properly formatted and the response is standardized.
+
+4. **[Ollama Model](ca://s?q=Use_Ollama_as_backend_for_chat)**  
+   - Processes the text and generates a summary.  
+   - Returns the result back through MCP.
+
+5. **Output**  
+   - Flask displays the summary in the browser.
+
+### Diagram
+
+
+
+User (Web UI) → Flask App → Fetcher → MCP → Ollama Model → MCP → Flask → User
+
+
+---
+
+## 🎯 Use Case
+
+In this project, MCP is used to:
+- Fetch article text.
+- Send it to Ollama for summarization.
+- Return a concise summary to the user.
+
+This demonstrates a **real-world workflow**: integrating AI into a web app with minimal friction.
+
+---
+
+## 🌟 Benefits of MCP
+
+- **[Interoperability](ca://s?q=Explain_MCP_interoperability)**: Works with different models (Llama2, GPT, etc.) without changing app logic.
+- **[Consistency](ca://s?q=Explain_MCP_consistency)**: Standard request/response format makes debugging and scaling easier.
+- **[Flexibility](ca://s?q=Explain_MCP_flexibility)**: Swap models or backends quickly (e.g., Ollama → OpenAI).
+- **[Scalability](ca://s?q=Explain_MCP_scalability)**: Same protocol can be used across multiple apps and services.
+- **[Developer Productivity](ca://s?q=Explain_MCP_productivity)**: Focus on building features, not reinventing communication layers.
+
+---
+
+## 📌 Why MCP is Helpful
+
+Without MCP:
+- Each app would need custom code for each model.
+- Switching models would mean rewriting integration logic.
+- Debugging would be inconsistent across projects.
+
+With MCP:
+- One protocol, many models.
+- Easier demos, faster prototypes.
+- Clear separation of concerns (UI, fetcher, summarizer, model).
+
+---
+
+## 🧑‍💻 Explaining to Juniors
+
+When teaching MCP:
+- Compare it to **HTTP for the web** — just like HTTP standardizes communication between browsers and servers, MCP standardizes communication between apps and AI models.
+- Show how our summarizer project uses MCP to connect Flask → Ollama seamlessly.
+- Highlight that MCP makes AI integration **future-proof**: if tomorrow you want to use a different model, you don’t need to rebuild the whole app.
+
+---
