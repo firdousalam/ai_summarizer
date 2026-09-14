@@ -1,33 +1,13 @@
-# fetcher.py
-from urllib.request import urlopen
-from html.parser import HTMLParser
-
-
-class _ParagraphParser(HTMLParser):
-    def __init__(self):
-        super().__init__()
-        self._in_paragraph = False
-        self._paragraphs = []
-        self._current = []
-
-    def handle_starttag(self, tag, attrs):
-        if tag == 'p':
-            self._in_paragraph = True
-            self._current = []
-
-    def handle_endtag(self, tag):
-        if tag == 'p' and self._in_paragraph:
-            self._paragraphs.append(''.join(self._current).strip())
-            self._in_paragraph = False
-
-    def handle_data(self, data):
-        if self._in_paragraph:
-            self._current.append(data)
+import requests
+from bs4 import BeautifulSoup
 
 
 def fetch_article(url):
-    with urlopen(url) as response:
-        html = response.read().decode('utf-8', errors='replace')
-    parser = _ParagraphParser()
-    parser.feed(html)
-    return " ".join(parser._paragraphs)
+    response = requests.get(url)
+    if response.status_code != 200:
+        raise Exception(
+            f"Failed to fetch article. Status code: {response.status_code}")
+    soup = BeautifulSoup(response.text, 'html.parser')
+    paragraphs = soup.find_all('p')
+    article_text = " ".join([p.get_text() for p in paragraphs])
+    return article_text
