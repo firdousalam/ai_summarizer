@@ -8,6 +8,13 @@ def summarize_text(article_text):
         "model": "llama2",  # or any Ollama model you’ve pulled
         "prompt": f"Summarize this article in 5 sentences:\n\n{article_text}"
     }
+
+   # If you want GPT‑4 or Claude:
+    # payload = {
+    #     "model": "gpt4",  # or "claude"
+    #     "prompt": f"Summarize this article in 5 sentences:\n\n{article_text}"
+    # }
+
     request = Request(
         "http://localhost:11434/api/generate",
         data=json.dumps(payload).encode("utf-8"),
