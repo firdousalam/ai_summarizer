@@ -100,3 +100,76 @@ Code
 ---
 
 Would you like me to also create a **[CLI version](ca://s?q=Build_CLI_version_for_summarizer)** of this project so you can run summaries directly from the terminal without the Flask UI?
+
+
+---
+
+## 📦 Dependency Setup with requirements.txt
+
+This project uses a `requirements.txt` file to manage dependencies.  
+It ensures that anyone cloning the repo can install the exact packages needed.
+
+### 1. Create and Activate a Virtual Environment
+It’s best practice to use a virtual environment so dependencies don’t conflict with your global Python setup.
+
+```bash
+# Create venv
+python -m venv venv
+
+# Activate venv (Windows)
+venv\Scripts\activate
+
+# Activate venv (Linux/Mac)
+source venv/bin/activate
+
+
+2. Install Dependencies
+Once inside the virtual environment, install all required packages:
+
+pip install -r requirements.txt
+
+This will install:
+
+Flask → Web framework for the UI
+
+Requests → Fetches article content
+
+BeautifulSoup4 → Parses HTML text
+
+3. Verify Installation
+Check that packages are installed correctly:
+
+bash
+pip list
+You should see flask, requests, and beautifulsoup4 listed.
+
+4. Run the App
+Now you can start the summarizer:
+
+bash
+python app.py
+Open your browser at:
+
+Code
+http://127.0.0.1:5000
+📂 requirements.txt Contents
+Code
+flask
+requests
+beautifulsoup4
+🔧 Notes
+Always activate your virtual environment before running the app.
+
+If you add new dependencies, update requirements.txt with:
+
+bash
+pip freeze > requirements.txt
+This ensures collaborators or future setups can reproduce the environment easily.
+
+Code
+
+---
+
+This addition makes your README much more **developer-friendly** and prevents the exact issue you ran into (global vs venv mismatch).  
+
+Would you like me to also add a **[Project Structure diagram](ca://s?q=Add_project_structure_to_README)** section so new contributors can instantly see how `app.py`, `fetcher.py`, and `summarizer.py` fit together?
